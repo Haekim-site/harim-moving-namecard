@@ -161,9 +161,11 @@
     const p = Math.min(1, Math.max(0, window.scrollY / max));
     const e = p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2)/2;
 
-    // Use card's own dimensions, not window (matters when rotated on mobile)
-    const cw = card.clientWidth;
-    const ch = card.clientHeight;
+    // Use card's own dimensions. On portrait mobile the card is 100vh wide × 100vw tall,
+    // so swap window dimensions instead of relying on getComputedStyle/clientWidth.
+    const portraitMobile = window.matchMedia('(max-width: 820px) and (orientation: portrait)').matches;
+    const cw = portraitMobile ? window.innerHeight : window.innerWidth;
+    const ch = portraitMobile ? window.innerWidth : window.innerHeight;
     const cx = cw / 2;
     const cy = ch / 2;
 
