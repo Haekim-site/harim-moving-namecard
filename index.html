@@ -11,13 +11,20 @@
     font-display: swap;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { background: #fff; color: #000; font-family: 'Andale Mono', 'Courier New', Courier, monospace; }
+  html, body {
+    background: #fff url('paper.png') repeat;
+    background-size: 600px auto;
+    color: #000;
+    font-family: 'Andale Mono', 'Courier New', Courier, monospace;
+  }
   body { height: 300vh; }
 
   .stage {
     position: fixed;
     inset: 0;
     overflow: hidden;
+    background: url('paper.png') repeat;
+    background-size: 600px auto;
   }
 
   .corner {
@@ -29,14 +36,15 @@
   .corner img { display: block; height: auto; user-select: none; -webkit-user-drag: none; }
 
   /* size scales (px) — matches SVG intrinsic sizes */
-  #tl img { width: 95px;  }   /* name 95x30 */
+  #tl img { width: 100px; }   /* name (slightly larger than 95px original) */
   #tr img { width: 61px;  }   /* instagram 61x10 */
   #bl img { width: 159px; }   /* email 159x12 */
   #br img { width: 158px; }   /* phone 158x12 */
 
   #tl { top: 6vh;  left: 6vw; }
-  #tr { top: 6vh;  right: 6vw; }
-  #bl { bottom: 6vh; left: 6vw; }
+  #tr { top: calc(6vh + 12px); left: calc(6vw + 98px); }
+  /* email/phone SVGs have ~3px internal left padding; shift left so visible edges align with name */
+  #bl { bottom: 6vh; left: calc(6vw - 3px); }
   #br { bottom: 6vh; right: 6vw; }
 
   .center {
@@ -182,12 +190,12 @@
     // cluster layout (block-local coords, top-left of each element)
     // name 95x30, instagram 61x10, email 159x12, phone 158x12
     const layout = {
-      tl: { w: 95,  h: 30, x: 0,   y: 0  },   // name
-      tr: { w: 61,  h: 10, x: 95,  y: 8  },   // @55hio (right next to "Harim Oh")
-      bl: { w: 159, h: 12, x: 0,   y: 38 },   // email
-      br: { w: 158, h: 12, x: 0,   y: 56 },   // phone
+      tl: { w: 100, h: 32, x: 0,  y: 0  },    // name
+      tr: { w: 61,  h: 10, x: 98, y: 12 },    // @55hio — right edge aligns with email
+      bl: { w: 159, h: 12, x: -3, y: 38 },    // email (shift left so visible edge aligns with name)
+      br: { w: 158, h: 12, x: -3, y: 56 },    // phone
     };
-    const blockW = 161;
+    const blockW = 159;
     const blockH = 68;
     const anchorX = cx - blockW/2;
     const anchorY = cy - blockH/2;
