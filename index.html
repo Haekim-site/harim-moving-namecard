@@ -42,8 +42,7 @@
 
   #tl { top: 6vh;  left: 6vw; }
   #tr { top: calc(6vh + 12px); left: calc(6vw + 98px); }
-  /* email/phone SVGs have ~3px internal left padding; shift left so visible edges align with name */
-  #bl { bottom: 6vh; left: calc(6vw - 3px); }
+  #bl { bottom: 6vh; left: 6vw; }
   #br { bottom: 6vh; right: 6vw; }
 
   .center {
@@ -191,8 +190,8 @@
     const layout = {
       tl: { w: 100, h: 32, x: 0,  y: 0  },    // name
       tr: { w: 61,  h: 10, x: 98, y: 12 },    // @55hio — right edge aligns with email
-      bl: { w: 159, h: 12, x: -3, y: 38 },    // email (shift left so visible edge aligns with name)
-      br: { w: 158, h: 12, x: -3, y: 56 },    // phone
+      bl: { w: 159, h: 12, x: 0,  y: 38 },    // email
+      br: { w: 158, h: 12, x: 0,  y: 56 },    // phone
     };
     const blockW = 159;
     const blockH = 68;
