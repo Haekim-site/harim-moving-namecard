@@ -11,12 +11,20 @@
     font-display: swap;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { background: #fff; }
-  body {
+  html, body {
     color: #000;
     font-family: 'Andale Mono', 'Courier New', Courier, monospace;
-    background: url('paper.jpg') center/cover no-repeat fixed;
+    background: transparent;
   }
+  .paper-bg {
+    position: fixed;
+    inset: 0;
+    background: #fff url('paper.jpg') center/cover no-repeat;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .stage { z-index: 1; }
+  .hint { z-index: 2; }
   body { height: 300vh; }
 
   .stage {
@@ -140,6 +148,7 @@
 </style>
 </head>
 <body>
+  <div class="paper-bg"></div>
   <div class="stage">
     <div class="corner" id="tl">
       <img src="name.svg" alt="Harim Oh 오하림 吳河林">
