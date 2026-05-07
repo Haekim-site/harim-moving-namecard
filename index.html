@@ -12,10 +12,17 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    background: #fff url('paper.jpg') repeat;
-    background-size: 600px auto;
+    background: #fff;
     color: #000;
     font-family: 'Andale Mono', 'Courier New', Courier, monospace;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('paper.jpg') center/cover no-repeat;
+    z-index: -1;
+    pointer-events: none;
   }
   body { height: 300vh; }
 
@@ -23,7 +30,6 @@
     position: fixed;
     inset: 0;
     overflow: hidden;
-    background: url('paper.jpg') center/cover no-repeat;
   }
 
   .corner {
