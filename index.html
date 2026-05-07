@@ -125,11 +125,18 @@
     60%, 100% { transform: rotate(-90deg); }
   }
 
-  /* show prompt only on small screens in portrait */
+  /* on portrait mobile, render the card pre-rotated 90deg (landscape) */
   @media (max-width: 820px) and (orientation: portrait) {
-    .rotate-prompt { display: flex; }
-    .stage, .hint { display: none; }
-    body { height: 100vh; overflow: hidden; }
+    .stage {
+      width: 100vh;
+      height: 100vw;
+      top: 50%;
+      left: 50%;
+      inset: auto;
+      transform: translate(-50%, -50%) rotate(90deg);
+      transform-origin: center center;
+    }
+    .hint { display: none; }
   }
 </style>
 </head>
@@ -160,11 +167,6 @@
   <div class="hint" id="hint">SCROLL ↓</div>
   <div class="toast" id="toast">COPIED</div>
 
-  <div class="rotate-prompt">
-    <div class="icon"></div>
-    <div>PLEASE ROTATE<br>YOUR DEVICE</div>
-    <div style="font-size:10px; color:#888; letter-spacing:0.15em;">화면을 가로로 돌려주세요</div>
-  </div>
 
 <script>
   const tl = document.getElementById('tl');
