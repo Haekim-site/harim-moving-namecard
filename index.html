@@ -30,7 +30,8 @@
      In portrait mobile it is rotated 90deg so the design appears horizontal. */
   .card {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -105,10 +106,9 @@
     .card {
       width: 100vh;
       height: 100vw;
-      top: 50%;
-      left: 50%;
-      inset: auto;
-      transform: translate(-50%, -50%) rotate(90deg);
+      top: calc((100vh - 100vw) / 2);
+      left: calc((100vw - 100vh) / 2);
+      transform: rotate(90deg);
       transform-origin: center center;
     }
     .hint { display: none; }
@@ -161,11 +161,9 @@
     const p = Math.min(1, Math.max(0, window.scrollY / max));
     const e = p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2)/2;
 
-    // Use card's own dimensions. On portrait mobile the card is 100vh wide × 100vw tall,
-    // so swap window dimensions instead of relying on getComputedStyle/clientWidth.
-    const portraitMobile = window.matchMedia('(max-width: 820px) and (orientation: portrait)').matches;
-    const cw = portraitMobile ? window.innerHeight : window.innerWidth;
-    const ch = portraitMobile ? window.innerWidth : window.innerHeight;
+    // Use card's actual layout (pre-transform) dimensions
+    const cw = card.offsetWidth;
+    const ch = card.offsetHeight;
     const cx = cw / 2;
     const cy = ch / 2;
 
